@@ -224,6 +224,50 @@ def login_screen():
 # الصفحة الرئيسية للمستخدم
 # ────────────────────────────────────────────────
 def user_home_screen():
+    # ──── CSS مخصص للأزرار ────
+    st.markdown("""
+    <style>
+    /* زر عادي */
+    div.stButton > button:first-child {
+        background: linear-gradient(to right, #00467f, #a5cc82);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 14px 24px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    /* hover */
+    div.stButton > button:first-child:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        background: linear-gradient(135deg, #6366f1, #a78bfa);
+    }
+
+    /* زر تسجيل الخروج (لونه أحمر) */
+    div.stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #ef4444, #f87171) !important;
+    }
+    
+    div.stButton > button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #dc2626, #f87171) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px rgba(239, 68, 68, 0.4);
+    }
+
+    /* إخفاء الـ border الافتراضي إذا أردت */
+    div.stButton > button {
+        border: none !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
     st.markdown("### ﴿مِّنَ الْمُؤْمِنِينَ رِجَالٌ صَدَقُوا مَا عَاهَدُوا اللَّهَ عَلَيْهِ﴾")
     st.success(f"مرحبًا بك يا {st.session_state.username}")
     st.markdown("### 📌 اختر العملية المطلوبة")
@@ -239,6 +283,8 @@ def user_home_screen():
     st.markdown('<hr class="custom-divider">', unsafe_allow_html=True)
     if st.button("🚪 تسجيل الخروج", type="primary", use_container_width=True):
         logout()
+
+
 
 # ────────────────────────────────────────────────
 # عرض واجبات اليوم حسب المستوى
@@ -1502,6 +1548,49 @@ def logout():
 # ────────────────────────────────────────────────
 
 def admin_screen():
+    # ──── CSS مخصص للأزرار ────
+    st.markdown("""
+    <style>
+    /* زر عادي */
+    div.stButton > button:first-child {
+        background: linear-gradient(to right, #00467f, #a5cc82);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 14px 24px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    /* hover */
+    div.stButton > button:first-child:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        background: linear-gradient(135deg, #6366f1, #a78bfa);
+    }
+
+    /* زر تسجيل الخروج (لونه أحمر) */
+    div.stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #ef4444, #f87171) !important;
+    }
+    
+    div.stButton > button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #dc2626, #f87171) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px rgba(239, 68, 68, 0.4);
+    }
+
+    /* إخفاء الـ border الافتراضي إذا أردت */
+    div.stButton > button {
+        border: none !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     st.markdown("### ﴿مِّنَ الْمُؤْمِنِينَ رِجَالٌ صَدَقُوا مَا عَاهَدُوا اللَّهَ عَلَيْهِ﴾")
     st.markdown("### 📌 اختر العملية")
 
@@ -1522,36 +1611,88 @@ def admin_screen():
     if st.button("🚪 تسجيل الخروج", type="primary", use_container_width=True):
         logout()
 
+
 # ────────────────────────────────────────────────
 # شاشة متابعة الطلاب للأدمن
 # ────────────────────────────────────────────────
 def admin_students_screen():
     st.header("📋 متابعة الطلبة")
+    
+    # Custom CSS for student and back buttons
+    st.markdown("""
+        <style>
+        /* Student buttons styling */
+        div[data-testid="stButton"] > button:not([kind="secondary"]) {
+            background: linear-gradient(to right, #159957, #155799); !important;
+            color: white !important;
+            border: none !important;
+            padding: 0.75rem 1rem !important;
+            font-size: 1rem !important;
+            font-weight: 500 !important;
+            border-radius: 8px !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        }
+        
+        div[data-testid="stButton"] > button:not([kind="secondary"]):hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+            opacity: 0.9 !important;
+        }
+        
+        /* Back button styling */
+        div[data-testid="stButton"]:last-child > button {
+            background: linear-gradient(to right, #159957, #155799); !important;
+            color: white !important;
+            border: none !important;
+            padding: 0.75rem 1rem !important;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3) !important;
+        }
+        
+        div[data-testid="stButton"]:last-child > button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+            opacity: 0.95 !important;
+        }
+        
+        /* Custom divider */
+        .custom-divider {
+            border: none;
+            border-top: 2px solid #e5e7eb;
+            margin: 2rem 0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     users_df = load_users()
     students_df = get_students_users(users_df)
-
+    
     if students_df.empty:
         st.warning("لا يوجد طلبة مسجلين")
         return
-
+    
     for _, row in students_df.iterrows():
         username = row["username"]
         level = row["level"]
-
-        if st.button(f"👤 {username} ", use_container_width=True):
+        if st.button(f"🎯 {username}", key=f"student_{username}", use_container_width=True):
             st.session_state.selected_student = {
                 "username": username,
                 "level": level
             }
             st.session_state.page = "admin_student_profile"
             st.rerun()
-
+    
     st.markdown('<hr class="custom-divider">', unsafe_allow_html=True)
-
+    
     if st.button("⬅️ رجوع", use_container_width=True):
         st.session_state.page = "admin"
         st.rerun()
-
+ 
+        
 # ────────────────────────────────────────────────
 # صفحة ملف الطالب للأدمن
 # ────────────────────────────────────────────────
@@ -1569,7 +1710,7 @@ def admin_student_profile_screen():
 
     eval_period = st.selectbox("مدة التقييم", ["يومي", "أسبوعي", "شهري"])
 
-    # ────────────── اختيار الفترة (نفس الكود السابق) ──────────────
+    # ────────────── اختيار الفترة ──────────────
     dates = []
     year = None
     month = None
@@ -1578,7 +1719,6 @@ def admin_student_profile_screen():
     if eval_period == "يومي":
         selected_date = st.date_input("اختر اليوم", value=date.today())
         dates = [selected_date]
-
     elif eval_period == "أسبوعي":
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -1595,8 +1735,7 @@ def admin_student_profile_screen():
             week_number = ["الأسبوع الأول", "الأسبوع الثاني", "الأسبوع الثالث", "الأسبوع الرابع"].index(week)
             start_day = week_number * 7 + 1
             end_day = min(start_day + 6, calendar.monthrange(year, month)[1])
-            dates = [date(year, month, day) for day in range(start_day, end_day + 1) if day <= calendar.monthrange(year, month)[1]]
-
+            dates = [date(year, month, day) for day in range(start_day, end_day + 1)]
     elif eval_period == "شهري":
         col1, col2 = st.columns(2)
         with col1:
@@ -1618,15 +1757,14 @@ def admin_student_profile_screen():
         st.warning("لا توجد بيانات متاحة")
         return
 
-    # ────────────── استخراج الأقسام المتاحة ──────────────
+    # استخراج الأقسام المتاحة
     df_sample = pd.read_excel(user_file, sheet_name=xls.sheet_names[0])
     all_sections = sorted(df_sample["القسم"].dropna().unique().tolist())
 
-    # فلترة الأقسام
     selected_sections = st.multiselect(
         "اختر الأقسام المطلوب عرضها",
         options=all_sections,
-        default=all_sections,  # اختيار الكل افتراضيًا
+        default=all_sections,
         placeholder="اختر قسم أو أكثر..."
     )
 
@@ -1635,7 +1773,7 @@ def admin_student_profile_screen():
         return
 
     if st.button("عرض الجدول", use_container_width=True) and dates:
-        # استخراج الأوراد مع الأقسام
+        # استخراج المهام الأساسية
         tasks_df = df_sample[df_sample["القسم"].isin(selected_sections)][["القسم", "الأعمال"]].copy()
         tasks_df["الأعمال"] = tasks_df["الأعمال"].str.strip()
 
@@ -1646,46 +1784,119 @@ def admin_student_profile_screen():
 
         excluded = ["حضور القلب", "رقم آية تدبرتها", "حال قلبك"]
 
+        # ──── إحصائيات جديدة ────
+        stats_done_counts = {}
+        stats_not_done_counts = {}
+
         for d in dates:
             sheet_name = d.strftime("%Y-%m-%d")
             statuses = []
             if sheet_name in xls.sheet_names:
                 df_day = pd.read_excel(user_file, sheet_name=sheet_name)
                 df_day["الأعمال"] = df_day["الأعمال"].str.strip()
+
                 for _, row in tasks_df.iterrows():
                     mask = (df_day["القسم"] == row["القسم"]) & (df_day["الأعمال"] == row["الأعمال"])
                     if mask.any():
                         status = str(df_day.loc[mask, "الحالة"].values[0]).strip()
-                        if row["الأعمال"] in excluded:
+                        task_name = row["الأعمال"]
+
+                        if task_name not in excluded:
+                            if status == "تم":
+                                stats_done_counts[task_name] = stats_done_counts.get(task_name, 0) + 1
+                            else:
+                                stats_not_done_counts[task_name] = stats_not_done_counts.get(task_name, 0) + 1
+
+                        if task_name in excluded:
                             statuses.append(status if status else "—")
                         else:
                             statuses.append("تم بفضل الله" if status == "تم" else "✗")
                     else:
                         statuses.append("—")
+
             else:
                 statuses = ["—"] * len(tasks_df)
+
             data[d.strftime("%Y-%m-%d")] = statuses
 
         result_df = pd.DataFrame(data)
 
-        # ────────────── FIXED CENTERING CODE ──────────────
-        # 1. Apply styles to the cells directly (this is the most stable method)
+        # عرض الجدول
         styled_df = result_df.style.set_properties(**{'text-align': 'center', 'vertical-align': 'middle'})
-        
-        # 2. Apply styles to the headers
         styled_df = styled_df.set_table_styles({
             'th': [{'selector': 'th', 'props': [('text-align', 'center')]}]
         })
-        # ───────────────────────────────────────────────────
 
-        # عرض الجدول
-        # FIX: Removed 'column_config' to prevent the table from disappearing
-        st.dataframe(
-            styled_df,
-            use_container_width=True
-        )
+        st.dataframe(styled_df, use_container_width=True)
 
-        # تصدير
+        # ────────────── NEW: قسم الإحصائيات الجذاب ──────────────
+        st.markdown('<hr class="custom-divider">', unsafe_allow_html=True)
+
+        st.markdown("""
+            <h2 style='text-align: center; margin-bottom: 20px;'>
+                📊 تحليل الإنجاز والإحصائيات
+            </h2>
+        """, unsafe_allow_html=True)
+
+        if stats_done_counts or stats_not_done_counts:
+            # إنشاء DataFrame للإحصائيات
+            df_stats = pd.DataFrame({
+                "المهمة": list(set(list(stats_done_counts.keys()) + list(stats_not_done_counts.keys())))
+            })
+
+            df_stats["عدد مرات الإنجاز"] = df_stats["المهمة"].apply(lambda x: stats_done_counts.get(x, 0))
+            df_stats["عدد مرات عدم الإنجاز"] = df_stats["المهمة"].apply(lambda x: stats_not_done_counts.get(x, 0))
+            df_stats["المجموع"] = df_stats["عدد مرات الإنجاز"] + df_stats["عدد مرات عدم الإنجاز"]
+
+            # نسبة الإنجاز (تجنب القسمة على صفر)
+            df_stats["نسبة الإنجاز (%)"] = (df_stats["عدد مرات الإنجاز"] / df_stats["المجموع"].replace(0, 1) * 100).round(1)
+            df_stats["نسبة الإنجاز (%)"] = df_stats["نسبة الإنجاز (%)"].clip(0, 100)
+
+            if not df_stats.empty:
+                # الأكثر إنجازاً
+                best_task = df_stats.loc[df_stats["عدد مرات الإنجاز"].idxmax()]
+                # الأكثر إهمالاً
+                worst_task = df_stats.loc[df_stats["عدد مرات عدم الإنجاز"].idxmax()]
+
+                # ─── عرض الكروت ───
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    st.markdown("""
+                        <div style="
+                            background-color: #d1fae5; 
+                            padding: 10px; 
+                            border-radius: 10px; 
+                            text-align: center; 
+                            border: 1px solid #10b981;
+                            margin-bottom: 10px;
+                            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+                        ">
+                            <h3 style="margin: 0; color: #065f46;">🏆 الأكثر التزامًا</h3>
+                            <h3 style="margin: 5px 0; color: #064e3b;">{} | تم {} مرة </h3>
+                        </div>
+                    """.format(best_task["المهمة"], int(best_task["عدد مرات الإنجاز"])), unsafe_allow_html=True)
+                
+                with col2:
+                    st.markdown("""
+                        <div style="
+                            background-color: #fee2e2; 
+                            padding: 10px; 
+                            border-radius: 10px; 
+                            text-align: center; 
+                            border: 1px solid #ef4444;
+                            margin-bottom: 10px;
+                            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+                        ">
+                            <h3 style="margin: 0; color: #991b1b;">⚠️ الأكثر إهمالاً</h3>
+                            <h3 style="margin: 5px 0; color: #7f1d1d;">{} | لم يتم {} مرة</h3>
+                        </div>
+                    """.format(worst_task["المهمة"], int(worst_task["عدد مرات عدم الإنجاز"])), unsafe_allow_html=True)
+
+        else:
+            st.info("لا توجد بيانات كافية لحساب الإحصائيات في الفترة المحددة")
+
+        # ─── تصدير الجدول ───
         output = io.BytesIO()
         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
             result_df.to_excel(writer, index=False, sheet_name='تقرير')
@@ -1705,8 +1916,6 @@ def admin_student_profile_screen():
         st.session_state.selected_student = None
         st.session_state.page = "admin_students"
         st.rerun()
-
-
 
 
 # ────────────────────────────────────────────────
