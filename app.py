@@ -188,8 +188,58 @@ if "level" not in st.session_state:
 def login_screen():
     st.header("🔐 تسجيل الدخول")
     st.markdown('<hr class="custom-divider">', unsafe_allow_html=True)
+    
+    # Custom CSS for input fields and login button
+    st.markdown("""
+        <style>
+
+        div[data-testid="stButton"] > button {
+            background: linear-gradient(to right, #536976, #292e49) !important;
+            color: white !important;
+            border: none !important;
+            padding: 0.875rem 1rem !important;
+            font-size: 1.125rem !important;
+            font-weight: 600 !important;
+            border-radius: 12px !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 8px rgba(83, 105, 118, 0.2) !important;
+            margin-top: 1rem !important;
+        }
+        
+        div[data-testid="stButton"] > button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 16px rgba(83, 105, 118, 0.4) !important;
+            opacity: 0.95 !important;
+        }
+        
+        div[data-testid="stButton"] > button:active {
+            transform: translateY(0) !important;
+        }
+        
+        /* Custom divider */
+        .custom-divider {
+            border: none;
+            border-top: 2px solid #e5e7eb;
+            margin: 2rem 0;
+        }
+        
+        /* Header styling */
+        h1 {
+            color: #1e293b !important;
+            font-weight: 700 !important;
+        }
+        
+        /* Alert styling */
+        div[data-testid="stAlert"] {
+            border-radius: 12px !important;
+            padding: 1rem !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     username = st.text_input("👤 اسم المستخدم")
     password = st.text_input("🔑 كلمة المرور", type="password")
+    
     if st.button("دخول", use_container_width=True):
         # تحميل البيانات من الملف مباشرة
         users_df = load_users()
@@ -197,18 +247,23 @@ def login_screen():
         if users_df.empty:
             st.error("لا توجد بيانات مستخدمين")
             return
+            
         user = users_df[
             (users_df["username"].astype(str) == username.strip()) &
             (users_df["password"].astype(str) == password)
         ]
+        
         if not user.empty:
             st.session_state.username = username
             st.session_state.role = str(user.iloc[0]["role"]).strip()
             level_value = str(user.iloc[0]["level"]).strip()
+            
             if "level" in level_value.lower():
                 level_value = level_value.lower().replace("level", "").strip()
                 level_value = level_value.lstrip(" _-").strip()
+                
             st.session_state.level = level_value
+            
             if st.session_state.role.lower() == "admin":
                 st.session_state.page = "admin"
             else:
@@ -219,6 +274,7 @@ def login_screen():
             
     st.markdown('<hr class="custom-divider">', unsafe_allow_html=True)
     st.header("صل على النبي ﷺ")
+
 
 # ────────────────────────────────────────────────
 # الصفحة الرئيسية للمستخدم
@@ -2164,6 +2220,8 @@ def admin_edit_screen():
     if st.button("⬅️ رجوع", use_container_width=True):
         st.session_state.page = "admin"
         st.rerun()
+
+
 
 
 # ────────────────────────────────────────────────
